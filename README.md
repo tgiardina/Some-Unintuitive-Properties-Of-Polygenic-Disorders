@@ -3,7 +3,7 @@
 This repo is in response to Scott Alexander's post titled [Some Unintuitive Properties of Polygenic Disorders](https://www.astralcodexten.com/p/some-unintuitive-properties-of-polygenic). In this post, Scott points out some limitations of the model he uses:
 > A better model would have to take into account that people’s children aren’t clones of themselves, and that children’s environment is correlated with their parents’.
 
-The model in this repo addresses both concerns. This isn't novel work, but a simplification of the model we use at Orchid to [estimate risk reduction using embryo selection](https://portal.orchidhealth.com/risk-calculator),    
+The model in this repo addresses both points. This isn't novel work, but a variation of the model we use at Orchid to [estimate disease risk reduction using embryo screening](https://portal.orchidhealth.com/risk-calculator),    
 
 ## Setup
 
