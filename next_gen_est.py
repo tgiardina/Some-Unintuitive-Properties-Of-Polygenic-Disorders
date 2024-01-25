@@ -6,11 +6,13 @@ if __name__ == "__main__":
     # Create the parser
     parser = ArgumentParser()
     parser.add_argument('--heritability', type=float, required=False, default=0.79)
-    parser.add_argument('--pop-avg', type=float, required=False, default=0.009)
+    parser.add_argument('--pop-avg', type=float, required=False, default=0.01)
+    parser.add_argument('--percent-environment-shared', type=float, required=False, default=0)
     parser.add_argument('--N', type=int, required=False, default=1000000)
     args = parser.parse_args()
     heritability = args.heritability
     pop_avg = args.pop_avg
+    percent_environment_shared = args.percent_environment_shared
     N = args.N
 
     # Create the covariance mxs.
@@ -20,9 +22,9 @@ if __name__ == "__main__":
         [0.5, 0, 1]
     ])
     environmental_covariance_mx = (1 - heritability) * np.array([  # Identical twins share some percent of their env.
-        [1, 0, 0],
-        [0, 1, 0],
-        [0, 0, 1],
+        [1, percent_environment_shared, percent_environment_shared],
+        [percent_environment_shared, 1, 0],
+        [percent_environment_shared, 0, 1],
     ])
 
     # Simulate the twins.
@@ -45,8 +47,8 @@ if __name__ == "__main__":
 
     # Calculate percentages.
     percent_affected_children_from_unaffected_parents = \
-        100 * np.sum(phenotype_mx[:, 0] & ~phenotype_mx[:, 1] & ~phenotype_mx[:, 1]) \
-        / np.sum(~phenotype_mx[:, 1] & ~phenotype_mx[:, 1])
+        100 * np.sum(phenotype_mx[:, 0] & ~phenotype_mx[:, 1] & ~phenotype_mx[:, 2]) \
+        / np.sum(~phenotype_mx[:, 1] & ~phenotype_mx[:, 2])
 
     # Print results.
-    print(f"Percent of affected children from unaffected parents: {percent_affected_children_from_unaffected_parents}")
+    print(f"Percent of affected children from unaffected parents: {round(percent_affected_children_from_unaffected_parents,2)}%")

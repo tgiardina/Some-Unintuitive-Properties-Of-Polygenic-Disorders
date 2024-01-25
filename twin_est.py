@@ -6,7 +6,7 @@ if __name__ == "__main__":
     # Create the parser
     parser = ArgumentParser()
     parser.add_argument('--heritability', type=float, required=False, default=0.79)  # Scz heritability.
-    parser.add_argument('--pop-avg', type=float, required=False, default=0.009)  # Scz prevalence.
+    parser.add_argument('--pop-avg', type=float, required=False, default=0.01)  # Scz prevalence.
     parser.add_argument('--percent-environment-shared', type=float, required=False, default=0)
     parser.add_argument('--N', type=int, required=False, default=1000000)
     args = parser.parse_args()
@@ -45,4 +45,4 @@ if __name__ == "__main__":
         100 * np.sum(phenotype_mx[:, 1] & phenotype_mx[:, 0]) / np.sum(phenotype_mx[:, 0])
 
     # Print results.
-    print(f"Percent of twins of affected individuals affected: {percent_twins_of_affected_affected}")
+    print(f"Percent of twins of affected individuals affected: {round(percent_twins_of_affected_affected,2)}%")
